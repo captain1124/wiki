@@ -1,4 +1,7 @@
 server:
   port: 8880
 
+spring.devtools.restart.enabled: true
+spring.devtools.restart.additional-paths: src/main/java
+#spring.devtools.restart.exclude: test/**
 
