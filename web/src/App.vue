@@ -1,30 +1,23 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <a-layout id="components-layout-demo-top-side-2">
+    <the-header></the-header>
+    <router-view/>
+    <the-footer></the-footer>
+  </a-layout>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { defineComponent } from 'vue';
+//引入组件，Theheader不能用横线连接
+import TheHeader from '@/components/the-header.vue';
+import TheFooter from '@/components/the-footer.vue';
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default defineComponent({
+  name: 'app',
+  components: {
+    //加入component
+    TheHeader,
+    TheFooter,
+  },
+});
+</script>
