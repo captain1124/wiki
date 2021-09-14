@@ -8,7 +8,7 @@ import AdminEbook from '../views/admin/admin-ebook.vue'
 import AdminCategory from '../views/admin/admin-category.vue'
 import AdminDoc from '../views/admin/admin-doc.vue'
 import store from "@/store";
-import {Tool} from "@/utils/tool";
+import {Tool} from "@/util/tool";
 
 const routes: Array<RouteRecordRaw> = [
   {

@@ -7,7 +7,7 @@
 <script lang="ts">
   import { defineComponent, computed, onMounted } from 'vue';
   import store from "@/store";
-  import {Tool} from "@/utils/tool";
+  import {Tool} from "@/util/tool";
   import { notification } from 'ant-design-vue';
 
   export default defineComponent({

@@ -7,17 +7,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-//引入组件，Theheader不能用横线连接
-import TheHeader from '@/components/the-header.vue';
-import TheFooter from '@/components/the-footer.vue';
+  import { defineComponent } from 'vue';
+  import TheHeader from '@/components/the-header.vue';
+  import TheFooter from '@/components/the-footer.vue';
 
-export default defineComponent({
-  name: 'app',
-  components: {
-    //加入component
-    TheHeader,
-    TheFooter,
-  },
-});
+  export default defineComponent({
+    name: 'app',
+    components: {
+      TheHeader,
+      TheFooter,
+    },
+  });
 </script>
