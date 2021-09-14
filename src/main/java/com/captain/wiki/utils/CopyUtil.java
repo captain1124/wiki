@@ -15,7 +15,7 @@ public class CopyUtil {
         if (source == null) {
             return null;
         }
-        T obj = null;
+        T obj;
         try {
             obj = clazz.newInstance();
         } catch (Exception e) {
