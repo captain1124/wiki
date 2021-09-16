@@ -21,6 +21,7 @@
           </a-form-item>
         </a-form>
       </p>
+
       <a-table
         :columns="columns"
         :row-key="record => record.id"
@@ -29,6 +30,8 @@
         :loading="loading"
         @change="handleTableChange"
       >
+        <!--#相当于一个标签,能够在下面渲染-->
+
         <template #cover="{ text: cover }">
           <img v-if="cover" :src="cover" alt="avatar" />
         </template>
@@ -36,6 +39,7 @@
           <span>{{ getCategoryName(record.category1Id) }} / {{ getCategoryName(record.category2Id) }}</span>
         </template>
         <template v-slot:action="{ text, record }">
+          <!--a标签可以渲染成一个连接效果-->
           <a-space size="small">
             <router-link :to="'/admin/doc?ebookId=' + record.id">
               <a-button type="primary">
@@ -92,7 +96,7 @@
   import { defineComponent, onMounted, ref } from 'vue';
   import axios from 'axios';
   import { message } from 'ant-design-vue';
-  import {Tool} from "@/util/tool";
+  import {Tool} from "@/util/ tool";
 
   export default defineComponent({
     name: 'AdminEbook',
@@ -285,6 +289,10 @@
         handleQueryCategory();
       });
 
+
+      /**
+       * 返回查询的数据或者操作
+       */
       return {
         param,
         ebooks,

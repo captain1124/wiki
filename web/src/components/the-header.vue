@@ -6,7 +6,9 @@
       mode="horizontal"
       :style="{ lineHeight: '64px' }"
     >
+      //可以不能重复，最好和路由一样
       <a-menu-item key="/">
+        /router-link就是可以完成跳转
         <router-link to="/">首页</router-link>
       </a-menu-item>
       <a-menu-item key="/admin/user" :style="user.id? {} : {display:'none'}">
