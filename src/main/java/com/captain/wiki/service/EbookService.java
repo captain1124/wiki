@@ -8,6 +8,7 @@ import com.captain.wiki.req.EbookQueryReq;
 import com.captain.wiki.req.EbookSaveReq;
 import com.captain.wiki.resp.EbookQueryResp;
 import com.captain.wiki.resp.PageResp;
+import com.captain.wiki.resp.SnowFlake;
 import com.captain.wiki.utils.CopyUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,6 +25,9 @@ public class EbookService {
 
     @Resource
     private EbookMapper ebookMapper;
+
+    @Resource
+    private SnowFlake snowFlake;
     
     private static final Logger LOG = LoggerFactory.getLogger(EbookService.class);
 
@@ -67,6 +71,8 @@ public class EbookService {
         Ebook ebook = CopyUtil.copy(req,Ebook.class);
         if(ObjectUtils.isEmpty(req.getId())){
             //新增
+            //id的写法:uuid,简单的自增以及雪花算法
+            ebook.setId(snowFlake.nextId());
             ebookMapper.insert(ebook);
         }else{
             //更新
