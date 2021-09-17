@@ -87,6 +87,7 @@
       <a-form-item label="名称">
         <a-input v-model:value="ebook.name" />
       </a-form-item>
+      <!--分类功能的嵌入-->
       <a-form-item label="分类">
         <a-cascader
           v-model:value="categoryIds"
@@ -200,6 +201,7 @@
       // -------- 表单 ---------
       /**
        * 数组，[100, 101]对应：前端开发 / Vue
+       * 分类选择
        */
       const categoryIds = ref();
       const ebook = ref();
@@ -268,6 +270,7 @@
       let categorys: any;
       /**
        * 查询所有分类
+       * 分类选择
        **/
       const handleQueryCategory = () => {
         loading.value = true;

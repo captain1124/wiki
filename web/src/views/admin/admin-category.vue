@@ -74,9 +74,11 @@
           v-model:value="category.parent"
           ref="select"
         >
+          <!--无分类-->
           <a-select-option :value="0">
             无
           </a-select-option>
+          <!--有分类-->
           <a-select-option v-for="c in level1" :key="c.id" :value="c.id" :disabled="category.id === c.id">
             {{c.name}}
           </a-select-option>
