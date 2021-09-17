@@ -196,6 +196,7 @@
         modalLoading.value = true;
         ebook.value.category1Id = categoryIds.value[0];
         ebook.value.category2Id = categoryIds.value[1];
+        //axios作为和后端交换
         axios.post("/ebook/save", ebook.value).then((response) => {
           modalLoading.value = false;
           const data = response.data; // data = commonResp

@@ -1,7 +1,6 @@
-package com.captain.wiki.resp;
+package com.captain.wiki.req;
 
-//一般是一一对应的
-public class EbookResp {
+public class EbookSaveReq {
     private Long id;
 
     private String name;

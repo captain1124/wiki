@@ -4,8 +4,9 @@ package com.captain.wiki.service;
 import com.captain.wiki.domain.Ebook;
 import com.captain.wiki.domain.EbookExample;
 import com.captain.wiki.mapper.EbookMapper;
-import com.captain.wiki.req.EbookReq;
-import com.captain.wiki.resp.EbookResp;
+import com.captain.wiki.req.EbookQueryReq;
+import com.captain.wiki.req.EbookSaveReq;
+import com.captain.wiki.resp.EbookQueryResp;
 import com.captain.wiki.resp.PageResp;
 import com.captain.wiki.utils.CopyUtil;
 import com.github.pagehelper.PageHelper;
@@ -26,7 +27,7 @@ public class EbookService {
     
     private static final Logger LOG = LoggerFactory.getLogger(EbookService.class);
 
-    public PageResp<EbookResp> list(EbookReq req){
+    public PageResp<EbookQueryResp> list(EbookQueryReq req){
         
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
@@ -52,13 +53,25 @@ public class EbookService {
         //            EbookResp ebookResp = CopyUtil.copy(ebook,EbookResp.class);
         //            respList.add(ebookResp);
         //        }
-        PageResp<EbookResp> pageResp = new PageResp();
+        PageResp<EbookQueryResp> pageResp = new PageResp();
 
-        List<EbookResp> respList = CopyUtil.copyList(ebookList,EbookResp.class);
+        List<EbookQueryResp> respList = CopyUtil.copyList(ebookList, EbookQueryResp.class);
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(respList);
 
         return pageResp;
+
+    }
+
+    public void save(EbookSaveReq req) {
+        Ebook ebook = CopyUtil.copy(req,Ebook.class);
+        if(ObjectUtils.isEmpty(req.getId())){
+            //新增
+            ebookMapper.insert(ebook);
+        }else{
+            //更新
+            ebookMapper.updateByPrimaryKey(ebook);
+        }
 
     }
 }
