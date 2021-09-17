@@ -50,12 +50,14 @@
             <a-button type="primary" @click="edit(record)">
               编辑
             </a-button>
+            <!--增加了删除的按钮反馈，通过@click响应，但是delete是关键字-->
             <a-popconfirm
               title="删除后不可恢复，确认删除?"
               ok-text="是"
               cancel-text="否"
               @confirm="handleDelete(record.id)"
             >
+
               <a-button type="danger">
                 删除
               </a-button>
@@ -232,9 +234,11 @@
         ebook.value = {};
       };
 
+
+      //axios发出请求,然后响应
       const handleDelete = (id: number) => {
         axios.delete("/ebook/delete/" + id).then((response) => {
-          const data = response.data; // data = commonResp
+          const data = response.data; // data = commonResp,这个是后端返回的,这个是fastjson自带的
           if (data.success) {
             // 重新加载列表
             handleQuery({
@@ -242,7 +246,7 @@
               size: pagination.value.pageSize,
             });
           } else {
-            message.error(data.message);
+            message.error(data.message); //响应的格式
           }
         });
       };

@@ -34,10 +34,28 @@ public class EbookController {
     }
 
     @PostMapping("/save")
-    public CommonResp save(EbookSaveReq req){
+    public CommonResp save(@RequestBody EbookSaveReq req){
         //在controller不要见到domain类
         CommonResp resp = new CommonResp<>();
         ebookService.save(req);
+        //无响应的
         return resp;
     }
+
+
+    // @RequestParam和@PathVariable都能够完成类似的功能——因为本质上，它们都是用户的输入，只不过输入的部分不同，一个在URL路径部分，另一个在参数部分。
+    //通过@PathVariable，例如/blogs/1
+    //通过@RequestParam，例如blogs?blogId=1
+
+    //改成了delete的mapping
+    @DeleteMapping("/delete/{id}")
+    public CommonResp delete(@PathVariable Long id){
+        //在controller不要见到domain类
+        CommonResp resp = new CommonResp<>();
+        ebookService.delete(id);
+        //无响应的
+        return resp;
+    }
+
+
 }

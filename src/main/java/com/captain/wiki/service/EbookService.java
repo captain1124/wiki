@@ -80,4 +80,9 @@ public class EbookService {
         }
 
     }
+
+    public void delete(Long id) {
+        //按照主键删除
+        ebookMapper.deleteByPrimaryKey(id);
+    }
 }
