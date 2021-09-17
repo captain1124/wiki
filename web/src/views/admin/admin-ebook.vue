@@ -234,6 +234,7 @@
        */
       const edit = (record: any) => {
         modalVisible.value = true;
+        //原来是把列表的值直接赋予给ebook,现在赋值值
         ebook.value = Tool.copy(record);
         categoryIds.value = [ebook.value.category1Id, ebook.value.category2Id]
       };
