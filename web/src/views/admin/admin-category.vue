@@ -25,6 +25,7 @@
                 closable
         />
       </p>
+      <!--pagination为false不进行分页-->
       <a-table
         v-if="level1.length > 0"
         :columns="columns"
@@ -133,12 +134,13 @@
        *     name: "",
        *   }]
        * }]
+       * 树形结构
        */
       const level1 = ref(); // 一级分类树，children属性就是二级分类
       level1.value = [];
 
       /**
-       * 数据查询
+       * 数据查询，改装成了树形结构
        **/
       const handleQuery = () => {
         loading.value = true;
@@ -148,6 +150,7 @@
           loading.value = false;
           const data = response.data;
           if (data.success) {
+            //data就是list，并未包装
             categorys.value = data.content;
             console.log("原始数组：", categorys.value);
 

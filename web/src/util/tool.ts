@@ -30,6 +30,8 @@ export class Tool {
   /**
    * 使用递归将数组转为树形结构
    * 父ID属性为parent
+   * 指导root下面的为0，这才返回
+   *
    */
   public static array2Tree (array: any, parentId: number) {
     if (Tool.isEmpty(array)) {

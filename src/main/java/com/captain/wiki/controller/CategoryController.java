@@ -3,14 +3,15 @@ package com.captain.wiki.controller;
 
 import com.captain.wiki.req.CategoryQueryReq;
 import com.captain.wiki.req.CategorySaveReq;
-import com.captain.wiki.resp.CommonResp;
 import com.captain.wiki.resp.CategoryQueryResp;
+import com.captain.wiki.resp.CommonResp;
 import com.captain.wiki.resp.PageResp;
 import com.captain.wiki.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/category")
@@ -30,6 +31,16 @@ public class CategoryController {
         //在controller不要见到domain类
         CommonResp<PageResp<CategoryQueryResp>> resp = new CommonResp<>();
         PageResp<CategoryQueryResp> list = categoryService.list(req);
+        resp.setContent(list);
+        return resp;
+    }
+
+
+    @RequestMapping("/all")
+    public CommonResp all(){
+        //在controller不要见到domain类
+        CommonResp<List<CategoryQueryResp>> resp = new CommonResp<>();
+        List<CategoryQueryResp> list = categoryService.all();
         resp.setContent(list);
         return resp;
     }
