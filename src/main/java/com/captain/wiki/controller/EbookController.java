@@ -10,6 +10,7 @@ import com.captain.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/ebook")
@@ -25,7 +26,7 @@ public class EbookController {
      * respondBody是一一对
      */
     @RequestMapping("/list")
-    public CommonResp list(@RequestBody EbookQueryReq req){
+    public CommonResp list(@Valid EbookQueryReq req){
         //在controller不要见到domain类
         CommonResp<PageResp<EbookQueryResp>> resp = new CommonResp<>();
         PageResp<EbookQueryResp> list = ebookService.list(req);
