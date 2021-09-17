@@ -202,7 +202,9 @@
         ebook.value.category2Id = categoryIds.value[1];
         //axios作为和后端交换
         axios.post("/ebook/save", ebook.value).then((response) => {
+          //loading效果，只要后端有返回，就将loading效果取出
           modalLoading.value = false;
+
           const data = response.data; // data = commonResp
           if (data.success) {
             modalVisible.value = false;

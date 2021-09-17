@@ -35,7 +35,7 @@ public class EbookController {
     }
 
     @PostMapping("/save")
-    public CommonResp save(@RequestBody EbookSaveReq req){
+    public CommonResp save(@Valid @RequestBody EbookSaveReq req){
         //在controller不要见到domain类
         CommonResp resp = new CommonResp<>();
         ebookService.save(req);
