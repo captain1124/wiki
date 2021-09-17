@@ -96,7 +96,7 @@
   import { defineComponent, onMounted, ref } from 'vue';
   import axios from 'axios';
   import { message } from 'ant-design-vue';
-  import {Tool} from "@/util/ tool";
+  import {Tool} from "@/util/tool";
 
   export default defineComponent({
     name: 'AdminEbook',
@@ -152,6 +152,7 @@
         // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
         ebooks.value = [];
         axios.get("/ebook/list", {
+          // 请求的参数包装成一个param
           params: {
             page: params.page,
             size: params.size,

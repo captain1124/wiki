@@ -6,6 +6,7 @@ import com.captain.wiki.domain.EbookExample;
 import com.captain.wiki.mapper.EbookMapper;
 import com.captain.wiki.req.EbookReq;
 import com.captain.wiki.resp.EbookResp;
+import com.captain.wiki.resp.PageResp;
 import com.captain.wiki.utils.CopyUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -25,7 +26,7 @@ public class EbookService {
     
     private static final Logger LOG = LoggerFactory.getLogger(EbookService.class);
 
-    public List<EbookResp> list(EbookReq req){
+    public PageResp<EbookResp> list(EbookReq req){
         
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
@@ -34,7 +35,7 @@ public class EbookService {
             criteria.andNameLike("%"+req.getName()+"%");
         }
         //只对下面第一个遇到的sql有效
-        PageHelper.startPage(1,3);
+        PageHelper.startPage(req.getPage(), req.getSize());
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 
         PageInfo<Ebook> pageInfo = new PageInfo<>(ebookList);
@@ -51,9 +52,13 @@ public class EbookService {
         //            EbookResp ebookResp = CopyUtil.copy(ebook,EbookResp.class);
         //            respList.add(ebookResp);
         //        }
-        List<EbookResp> respList = CopyUtil.copyList(ebookList,EbookResp.class);
+        PageResp<EbookResp> pageResp = new PageResp();
 
-        return respList;
+        List<EbookResp> respList = CopyUtil.copyList(ebookList,EbookResp.class);
+        pageResp.setTotal(pageInfo.getTotal());
+        pageResp.setList(respList);
+
+        return pageResp;
 
     }
 }
