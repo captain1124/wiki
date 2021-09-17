@@ -296,6 +296,7 @@
         });
       };
 
+      //获得名字
       const getCategoryName = (cid: number) => {
         // console.log(cid)
         let result = "";

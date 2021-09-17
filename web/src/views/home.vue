@@ -11,6 +11,7 @@
           <MailOutlined />
           <span>欢迎</span>
         </a-menu-item>
+        <!--下面的是显示栏-->
         <a-sub-menu v-for="item in level1" :key="item.id" :disabled="true">
           <template v-slot:title>
             <span><user-outlined />{{item.name}}</span>
@@ -96,9 +97,10 @@ export default defineComponent({
     const level1 =  ref();
     let categorys: any;
     /**
-     * 查询所有分类
+     * 查询所有分类，显示分类
      **/
     const handleQueryCategory = () => {
+      //axios是异步的
       axios.get("/category/all").then((response) => {
         const data = response.data;
         if (data.success) {
