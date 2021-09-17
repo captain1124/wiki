@@ -5,16 +5,22 @@
       :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
       <p>
+        <!--封装成param-->
         <a-form layout="inline" :model="param">
+
+          <!--查询的方法-->
           <a-form-item>
             <a-input v-model:value="param.name" placeholder="名称">
             </a-input>
           </a-form-item>
           <a-form-item>
+            <!--handleQuery是json对象-->
             <a-button type="primary" @click="handleQuery({page: 1, size: pagination.pageSize})">
               查询
             </a-button>
           </a-form-item>
+
+
           <a-form-item>
             <a-button type="primary" @click="add()">
               新增
@@ -104,8 +110,10 @@
   export default defineComponent({
     name: 'AdminEbook',
     setup() {
+      //响应式变量，且设置初始变量为空
       const param = ref();
       param.value = {};
+
       const ebooks = ref();
       const pagination = ref({
         current: 1,
@@ -159,6 +167,7 @@
           params: {
             page: params.page,
             size: params.size,
+            //这个变量是从响应式变量获取的
             name: param.value.name
           }
         }).then((response) => {
