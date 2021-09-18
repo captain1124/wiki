@@ -125,9 +125,12 @@ public class UserService {
      * 登录
      */
     public UserLoginResp login(UserLoginReq req) {
+        //Db标志着是从数据库查的
         User userDb = selectByLoginName(req.getLoginName());
+        //返回给前端是:用户名不对或者密码错误，这样才相对安全
         if (ObjectUtils.isEmpty(userDb)) {
             // 用户名不存在
+            //要输出日志
             LOG.info("用户名不存在, {}", req.getLoginName());
             throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
         } else {
@@ -137,6 +140,7 @@ public class UserService {
                 return userLoginResp;
             } else {
                 // 密码不对
+                //可以实现申请五次加锁
                 LOG.info("密码不对, 输入密码：{}, 数据库密码：{}", req.getPassword(), userDb.getPassword());
                 throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
             }

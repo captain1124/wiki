@@ -66,6 +66,7 @@ public class UserController {
 
     @PostMapping("/login")
     public CommonResp login(@Valid @RequestBody UserLoginReq req) {
+        //密码需要两层加密，因而需要对req里面的resp加密
         req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         CommonResp<UserLoginResp> resp = new CommonResp<>();
         UserLoginResp userLoginResp = userService.login(req);
