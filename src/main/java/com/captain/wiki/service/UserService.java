@@ -90,6 +90,7 @@ public class UserService {
             // 更新
             user.setLoginName(null);
             user.setPassword(null);
+            //如果user有值就更新，否则不会更新
             userMapper.updateByPrimaryKeySelective(user);
         }
     }
