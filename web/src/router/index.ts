@@ -59,6 +59,7 @@ const routes: Array<RouteRecordRaw> = [
       loginRequire: true
     }
   },
+  // doc的路由
   {
     path: '/admin/doc',
     name: 'AdminDoc',

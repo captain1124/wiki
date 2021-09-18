@@ -48,11 +48,13 @@
         <template v-slot:action="{ text, record }">
           <!--a标签可以渲染成一个连接效果-->
           <a-space size="small">
+          <!--doc的入口-->
             <router-link :to="'/admin/doc?ebookId=' + record.id">
               <a-button type="primary">
                 文档管理
               </a-button>
             </router-link>
+
             <a-button type="primary" @click="edit(record)">
               编辑
             </a-button>
