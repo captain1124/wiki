@@ -252,10 +252,12 @@
 
       /**
        * 重置密码
+       *
        */
       const resetPassword = (record: any) => {
         resetModalVisible.value = true;
         user.value = Tool.copy(record);
+        //清空密码
         user.value.password = null;
       };
 

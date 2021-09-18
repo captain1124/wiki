@@ -117,6 +117,7 @@ public class UserService {
      */
     public void resetPassword(UserResetPasswordReq req) {
         User user = CopyUtil.copy(req, User.class);
+        //如果user有值就更新，否则不会更新
         userMapper.updateByPrimaryKeySelective(user);
     }
 
