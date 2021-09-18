@@ -3,6 +3,7 @@
     <a-layout-content
       :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
+      <!--文档为左右布局，可以查看官网-->
       <a-row :gutter="24">
         <a-col :span="8">
           <p>
