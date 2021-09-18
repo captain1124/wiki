@@ -108,6 +108,12 @@ public class DocService {
         docMapper.deleteByPrimaryKey(id);
     }
 
+    public String findContent(Long id) {
+        //按照主键删除
+        Content content = contentMapper.selectByPrimaryKey(id);
+        return content.getContent();
+    }
+
     public void delete(List<String> ids) {
         DocExample docExample = new DocExample();
         DocExample.Criteria criteria = docExample.createCriteria();
