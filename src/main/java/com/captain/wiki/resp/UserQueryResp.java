@@ -1,6 +1,6 @@
-package com.captain.wiki.domain;
+package com.captain.wiki.resp;
 
-public class User {
+public class UserQueryResp {
     private Long id;
 
     private String loginName;

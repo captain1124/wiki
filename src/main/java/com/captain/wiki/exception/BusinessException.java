@@ -1,5 +1,8 @@
 package com.captain.wiki.exception;
 
+/**
+ * 一般继承runtimeexception
+ */
 public class BusinessException extends RuntimeException{
 
     private BusinessExceptionCode code;

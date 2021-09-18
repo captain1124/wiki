@@ -21,9 +21,9 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
-        <!--需要改动的地方-->
+        <!--需要改动的地方,注意要加nullCatalogMeansCurrent=true-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/wiki?characterEncoding=UTF8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true"
+                        connectionURL="jdbc:mysql://localhost:3306/wiki?nullCatalogMeansCurrent=true&amp;characterEncoding=UTF8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true"
                         userId="root"
                         password="19961124liquan">
         </jdbcConnection>
