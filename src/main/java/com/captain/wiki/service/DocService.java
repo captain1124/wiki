@@ -90,4 +90,13 @@ public class DocService {
         //按照主键删除
         docMapper.deleteByPrimaryKey(id);
     }
+
+    public void delete(List<String> ids) {
+        DocExample docExample = new DocExample();
+        DocExample.Criteria criteria = docExample.createCriteria();
+        //按照数据删除
+        criteria.andIdIn(ids);
+
+        docMapper.deleteByExample(docExample);
+    }
 }

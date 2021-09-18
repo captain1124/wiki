@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -60,11 +61,12 @@ public class DocController {
     //通过@RequestParam，例如blogs?blogId=1
 
     //改成了delete的mapping
-    @DeleteMapping("/delete/{id}")
-    public CommonResp delete(@PathVariable Long id){
+    @DeleteMapping("/delete/{idStr}")
+    public CommonResp delete(@PathVariable String idStr){
         //在controller不要见到domain类
         CommonResp resp = new CommonResp<>();
-        docService.delete(id);
+        List<String> list = Arrays.asList(idStr.split(","));
+        docService.delete(list);
         //无响应的
         return resp;
     }

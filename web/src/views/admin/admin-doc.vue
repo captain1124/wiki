@@ -83,6 +83,8 @@
             <a-form-item>
               <a-input v-model:value="doc.sort" placeholder="顺序"/>
             </a-form-item>
+
+            <!--富文本-->
             <a-form-item>
               <a-button type="primary" @click="handlePreviewContent()">
                 <EyeOutlined /> 内容预览
@@ -91,6 +93,8 @@
             <a-form-item>
               <div id="content"></div>
             </a-form-item>
+
+
           </a-form>
         </a-col>
       </a-row>
@@ -260,6 +264,7 @@
       const deleteNames: Array<string> = [];
       /**
        * 查找整根树枝
+       * 删除整个树
        */
       const getDeleteIds = (treeSelectData: any, id: any) => {
         // console.log(treeSelectData, id);
@@ -342,6 +347,11 @@
         treeSelectData.value.unshift({id: 0, name: '无'});
       };
 
+      /**
+       * 将这个逻辑放在前端，减少后端的压力
+       * 删除文档，并且删除子文档，
+       * @param id
+       */
       const handleDelete = (id: number) => {
         // console.log(level1, level1.value, id)
         // 清空数组，否则多次删除时，数组会一直增加
@@ -381,7 +391,6 @@
 
       onMounted(() => {
         handleQuery();
-
         editor.create();
       });
 
