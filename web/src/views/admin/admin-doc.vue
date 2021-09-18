@@ -65,6 +65,8 @@
             <a-form-item>
               <a-input v-model:value="doc.name" placeholder="名称"/>
             </a-form-item>
+            <!--父文档-->
+            <!--:replaceFields是替换-->
             <a-form-item>
               <a-tree-select
                 v-model:value="doc.parent"
@@ -77,6 +79,7 @@
               >
               </a-tree-select>
             </a-form-item>
+
             <a-form-item>
               <a-input v-model:value="doc.sort" placeholder="顺序"/>
             </a-form-item>
@@ -170,6 +173,7 @@
       const handleQuery = () => {
         loading.value = true;
         // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
+        //这个得清空，是为了后面方便调用
         level1.value = [];
         axios.get("/doc/all/" + route.query.ebookId).then((response) => {
           loading.value = false;
@@ -235,6 +239,7 @@
             node.disabled = true;
 
             // 遍历所有子节点，将所有子节点全部都加上disabled
+            //子节点设置为true
             const children = node.children;
             if (Tool.isNotEmpty(children)) {
               for (let j = 0; j < children.length; j++) {
@@ -301,7 +306,7 @@
       };
 
       /**
-       * 编辑
+       * 编辑,让子节点不能不能为0
        */
       const edit = (record: any) => {
         // 清空富文本框
@@ -311,6 +316,7 @@
         handleQueryContent();
 
         // 不能选择当前节点及其所有子孙节点，作为父节点，会使树断开
+        //因为选择组件的属性状态,会随着当前节点而变化，所以单独申明一个响应式变量
         treeSelectData.value = Tool.copy(level1.value);
         setDisable(treeSelectData.value, record.id);
 
