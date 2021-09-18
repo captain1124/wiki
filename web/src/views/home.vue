@@ -28,8 +28,9 @@
     <a-layout-content
     :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
   >
+      <!--欢迎页面-->
       <div class="welcome" v-show="isShowWelcome">
-        <the-welcome></the-welcome>
+        <the-welcome>欢迎来到Captain的wiki</the-welcome>
       </div>
       <a-list v-show="!isShowWelcome" item-layout="vertical" size="large" :grid="{ gutter: 20, column: 3 }" :data-source="ebooks">
         <template #renderItem="{ item }">
@@ -139,6 +140,7 @@ export default defineComponent({
       });
     };
 
+    //响应的方法,查询相应的书籍
     const handleClick = (value: any) => {
       // console.log("menu click", value)
       if (value.key === 'welcome') {
