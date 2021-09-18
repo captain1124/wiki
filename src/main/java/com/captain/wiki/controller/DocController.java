@@ -37,11 +37,11 @@ public class DocController {
     }
 
 
-    @RequestMapping("/all")
-    public CommonResp all(){
+    @RequestMapping("/all/{ebookId}")
+    public CommonResp all(@PathVariable long ebookId){
         //在controller不要见到domain类
         CommonResp<List<DocQueryResp>> resp = new CommonResp<>();
-        List<DocQueryResp> list = docService.all();
+        List<DocQueryResp> list = docService.all(ebookId);
         resp.setContent(list);
         return resp;
     }
