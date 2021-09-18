@@ -174,7 +174,7 @@
       const modalLoading = ref(false);
       const handleModalOk = () => {
         modalLoading.value = true;
-
+        //md5加密码
         user.value.password = hexMd5(user.value.password + KEY);
 
         axios.post("/user/save", user.value).then((response) => {
