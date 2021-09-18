@@ -1,8 +1,10 @@
 package com.captain.wiki.service;
 
 
+import com.captain.wiki.domain.Content;
 import com.captain.wiki.domain.Doc;
 import com.captain.wiki.domain.DocExample;
+import com.captain.wiki.mapper.ContentMapper;
 import com.captain.wiki.mapper.DocMapper;
 import com.captain.wiki.req.DocQueryReq;
 import com.captain.wiki.req.DocSaveReq;
@@ -28,8 +30,13 @@ public class DocService {
 
     @Resource
     private SnowFlake snowFlake;
-    
+
+    @Resource
+    private ContentMapper contentMapper;
+
     private static final Logger LOG = LoggerFactory.getLogger(DocService.class);
+
+
 
     public PageResp<DocQueryResp> list(DocQueryReq req){
 
@@ -74,16 +81,26 @@ public class DocService {
 
     public void save(DocSaveReq req) {
         Doc doc = CopyUtil.copy(req,Doc.class);
+        Content content = CopyUtil.copy(req, Content.class);
+
+
         if(ObjectUtils.isEmpty(req.getId())){
             //新增
             //id的写法:uuid,简单的自增以及雪花算法
+
             doc.setId(snowFlake.nextId());
             docMapper.insert(doc);
+
+            doc.setId(doc.getId());
+            contentMapper.insert(content);
         }else{
             //更新
             docMapper.updateByPrimaryKey(doc);
+            int count = contentMapper.updateByPrimaryKeyWithBLOBs(content);
+            if(count==0){
+                contentMapper.insert(content);
+            }
         }
-
     }
 
     public void delete(Long id) {
