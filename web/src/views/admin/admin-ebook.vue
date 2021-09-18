@@ -48,7 +48,7 @@
         <template v-slot:action="{ text, record }">
           <!--a标签可以渲染成一个连接效果-->
           <a-space size="small">
-          <!--doc的入口-->
+          <!--doc的入口,record.id是动态的-->
             <router-link :to="'/admin/doc?ebookId=' + record.id">
               <a-button type="primary">
                 文档管理

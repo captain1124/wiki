@@ -331,6 +331,7 @@
         // 清空富文本框
         editor.txt.html("");
         modalVisible.value = true;
+        //查询id
         doc.value = {
           ebookId: route.query.ebookId
         };
