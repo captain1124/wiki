@@ -6,6 +6,7 @@ import com.captain.wiki.domain.Doc;
 import com.captain.wiki.domain.DocExample;
 import com.captain.wiki.mapper.ContentMapper;
 import com.captain.wiki.mapper.DocMapper;
+import com.captain.wiki.mapper.DocMapperCust;
 import com.captain.wiki.req.DocQueryReq;
 import com.captain.wiki.req.DocSaveReq;
 import com.captain.wiki.resp.DocQueryResp;
@@ -25,8 +26,13 @@ import java.util.List;
 @Service
 public class DocService {
 
+
+
     @Resource
     private DocMapper docMapper;
+
+    @Resource
+    private DocMapperCust docMapperCust;
 
     @Resource
     private SnowFlake snowFlake;
@@ -87,8 +93,10 @@ public class DocService {
         if(ObjectUtils.isEmpty(req.getId())){
             //新增
             //id的写法:uuid,简单的自增以及雪花算法
-
             doc.setId(snowFlake.nextId());
+            //底层插入的时候包括了所有的字段，导致default0失效
+            doc.setViewCount(0);
+            doc.setVoteCount(0);
             docMapper.insert(doc);
 
             doc.setId(doc.getId());
@@ -111,6 +119,8 @@ public class DocService {
     public String findContent(Long id) {
         //按照主键删除
         Content content = contentMapper.selectByPrimaryKey(id);
+        //文档阅读数+1
+        docMapperCust.increaseViewCount(id);
         if(ObjectUtils.isEmpty(content)){
             return "";
         }else{
@@ -123,7 +133,6 @@ public class DocService {
         DocExample.Criteria criteria = docExample.createCriteria();
         //按照数据删除
         criteria.andIdIn(ids);
-
         docMapper.deleteByExample(docExample);
     }
 }
