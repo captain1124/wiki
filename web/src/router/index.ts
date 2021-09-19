@@ -64,6 +64,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/doc',
     name: 'AdminDoc',
     component: AdminDoc,
+    //元素数据,需要登录
+    //可以看上面四个
     meta: {
       loginRequire: true
     }
@@ -76,6 +78,7 @@ const router = createRouter({
 })
 
 // 路由登录拦截
+//vue2和vue3都一样，from-->to-->next
 router.beforeEach((to, from, next) => {
   // 要不要对meta.loginRequire属性做监控拦截
   if (to.matched.some(function (item) {

@@ -11,6 +11,7 @@
         /router-link就是可以完成跳转
         <router-link to="/">首页</router-link>
       </a-menu-item>
+      <!--只有存在值才显示，使用css隐藏-->
       <a-menu-item key="/admin/user" :style="user.id? {} : {display:'none'}">
         <router-link to="/admin/user">用户管理</router-link>
       </a-menu-item>
