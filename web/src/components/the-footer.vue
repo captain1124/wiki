@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer style="text-align: center">
-    甲蛙电子书<span v-show="user.id">，欢迎：{{user.name}}</span>
+    Wiki电子书:<span v-show="user.id">，欢迎：{{user.name}}</span>
   </a-layout-footer>
 </template>
 
@@ -20,6 +20,7 @@
       const onOpen = () => {
         console.log('WebSocket连接成功，状态码：', websocket.readyState)
       };
+
       const onMessage = (event: any) => {
         console.log('WebSocket收到消息：', event.data);
         notification['info']({
@@ -27,12 +28,14 @@
           description: event.data,
         });
       };
+
       const onError = () => {
         console.log('WebSocket连接错误，状态码：', websocket.readyState)
       };
       const onClose = () => {
         console.log('WebSocket连接关闭，状态码：', websocket.readyState)
       };
+
       const initWebSocket = () => {
         // 连接成功
         websocket.onopen = onOpen;

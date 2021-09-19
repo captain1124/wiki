@@ -1,5 +1,6 @@
 package com.captain.wiki.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.captain.wiki.req.UserLoginReq;
 import com.captain.wiki.req.UserQueryReq;
 import com.captain.wiki.req.UserResetPasswordReq;
@@ -12,11 +13,13 @@ import com.captain.wiki.service.UserService;
 import com.captain.wiki.utils.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -29,6 +32,9 @@ public class UserController {
 
     @Resource
     private SnowFlake snowFlake;
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
 
 
@@ -74,17 +80,19 @@ public class UserController {
         Long token = snowFlake.nextId();
         LOG.info("生成单点登录token：{}，并放入redis中", token);
         userLoginResp.setToken(token.toString());
-//        redisTemplate.opsForValue().set(token.toString(), JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
+        //将类放入redis需要序列化,但是json相对较慢，可以用其他的
+        redisTemplate.opsForValue().set(token.toString(), JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
 
         resp.setContent(userLoginResp);
         return resp;
     }
 
-//    @GetMapping("/logout/{token}")
-//    public CommonResp logout(@PathVariable String token) {
-//        CommonResp resp = new CommonResp<>();
-//////        redisTemplate.delete(token);
-////        LOG.info("从redis中删除token: {}", token);
-//        return resp;
-//    }
+    //置为0
+    @GetMapping("/logout/{token}")
+    public CommonResp logout(@PathVariable String token) {
+        CommonResp resp = new CommonResp<>();
+        redisTemplate.delete(token);
+        LOG.info("从redis中删除token: {}", token);
+        return resp;
+    }
 }

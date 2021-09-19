@@ -36,12 +36,15 @@
           <span>退出登录</span>
         </a>
       </a-popconfirm>
+
+      <!--这两个是互斥的-->
       <a class="login-menu" v-show="user.id">
         <span>您好：{{user.name}}</span>
       </a>
       <a class="login-menu" v-show="!user.id" @click="showLoginModal">
         <span>登录</span>
       </a>
+
     </a-menu>
 
     <a-modal
@@ -114,6 +117,7 @@
           const data = response.data;
           if (data.success) {
             message.success("退出登录成功！");
+            //存储user，setUser方法
             store.commit("setUser", {});
           } else {
             message.error(data.message);

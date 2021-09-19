@@ -5,6 +5,7 @@ import javax.validation.constraints.Pattern;
 
 public class UserLoginReq {
 
+    //notnull只会检验null,但是empty会校验”“和null
     @NotEmpty(message = "【用户名】不能为空")
     private String loginName;
 

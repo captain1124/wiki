@@ -7,6 +7,7 @@ public class UserLoginResp {
 
     private String name;
 
+    //增加token，作为返回去
     private String token;
 
     public Long getId() {
