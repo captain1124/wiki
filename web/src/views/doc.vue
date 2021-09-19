@@ -15,6 +15,7 @@
           </a-tree>
         </a-col>
         <a-col :span="18">
+        <!--增加了阅读数和点赞数-->
           <div>
             <h2>{{doc.name}}</h2>
             <div>
