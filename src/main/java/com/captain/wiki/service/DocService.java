@@ -17,7 +17,6 @@ import com.captain.wiki.utils.CopyUtil;
 import com.captain.wiki.utils.RedisUtil;
 import com.captain.wiki.utils.RequestContext;
 import com.captain.wiki.utils.SnowFlake;
-import com.captain.wiki.websocket.WebSocketServer;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -50,7 +49,10 @@ public class DocService {
     private RedisUtil redisUtil;
 
     @Resource
-    private WebSocketServer webSocketServer;
+    private WsService wsService;
+
+//    @Resource
+//    private WebSocketServer webSocketServer;
 
     private static final Logger LOG = LoggerFactory.getLogger(DocService.class);
 
@@ -153,6 +155,7 @@ public class DocService {
      * 点赞
      * @param id
      */
+
     public void vote(Long id) {
         // docMapperCust.increaseVoteCount(id);
         // 远程IP+doc.id作为key，24小时内不能重复
@@ -165,8 +168,10 @@ public class DocService {
 
         // 推送消息
         Doc docDb = docMapper.selectByPrimaryKey(id);
+        //取出流水号
         String logId = MDC.get("LOG_ID");
-        webSocketServer.sendInfo("【" + docDb.getName() + "】被点赞！");
+        //将流水号注入
+        wsService.sendInfo("【" + docDb.getName() + "】被点赞！", logId);
 
     }
 
