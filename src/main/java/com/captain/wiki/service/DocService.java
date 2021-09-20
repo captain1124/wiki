@@ -135,4 +135,8 @@ public class DocService {
         criteria.andIdIn(ids);
         docMapper.deleteByExample(docExample);
     }
+
+    public void vote(Long id) {
+        docMapperCust.increaseVoteCount(id);
+    }
 }

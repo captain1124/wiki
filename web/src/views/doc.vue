@@ -118,6 +118,7 @@
       };
 
       // 点赞
+      //前端加一，不要从后端取，否则响应太慢
       const vote = () => {
         axios.get('/doc/vote/' + doc.value.id).then((response) => {
           const data = response.data;

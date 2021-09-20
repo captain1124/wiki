@@ -59,7 +59,6 @@ public class DocController {
     // @RequestParam和@PathVariable都能够完成类似的功能——因为本质上，它们都是用户的输入，只不过输入的部分不同，一个在URL路径部分，另一个在参数部分。
     //通过@PathVariable，例如/blogs/1
     //通过@RequestParam，例如blogs?blogId=1
-
     //改成了delete的mapping
     @DeleteMapping("/delete/{idStr}")
     public CommonResp delete(@PathVariable String idStr){
@@ -80,6 +79,11 @@ public class DocController {
         return resp;
     }
 
-
+    @GetMapping("/vote/{id}")
+    public CommonResp vote(@PathVariable Long id) {
+        CommonResp commonResp = new CommonResp();
+        docService.vote(id);
+        return commonResp;
+    }
 
 }
