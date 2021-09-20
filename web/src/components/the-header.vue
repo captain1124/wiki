@@ -1,14 +1,14 @@
 <template>
   <a-layout-header class="header">
-    <div class="logo">甲蛙知识库</div>
+    <div class="logo">Captain知识库</div>
     <a-menu
       theme="dark"
       mode="horizontal"
       :style="{ lineHeight: '64px' }"
     >
-      //可以不能重复，最好和路由一样
+      <!-- 可以不能重复，最好和路由一样-->
       <a-menu-item key="/">
-        /router-link就是可以完成跳转
+      <!--router-link就是可以完成跳转-->
         <router-link to="/">首页</router-link>
       </a-menu-item>
       <!--只有存在值才显示，使用css隐藏-->
@@ -22,10 +22,7 @@
         <router-link to="/admin/category">分类管理</router-link>
       </a-menu-item>
       <a-menu-item key="/about">
-        <router-link to="/about">关于我们</router-link>
-      </a-menu-item>
-      <a-menu-item key="/aliyun">
-        <router-link to="/aliyun">阿里云优惠</router-link>
+        <router-link to="/about">关于我</router-link>
       </a-menu-item>
       <a-popconfirm
         title="确认退出登录?"
@@ -83,8 +80,8 @@
 
       // 用来登录
       const loginUser = ref({
-        loginName: "test",
-        password: "test"
+        loginName: "captain",
+        password: "19961124"
       });
       const loginModalVisible = ref(false);
       const loginModalLoading = ref(false);
