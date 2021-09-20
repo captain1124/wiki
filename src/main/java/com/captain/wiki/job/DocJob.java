@@ -27,7 +27,7 @@ public class DocJob {
      */
     @Scheduled(cron = "0/1 0 0-4 * * ? ")
     public void cron() {
-        // 增加日志流水号
+        // 放入流水号，方便运维
         MDC.put("LOG_ID", String.valueOf(snowFlake.nextId()));
         LOG.info("更新电子书下的文档数据开始");
         long start = System.currentTimeMillis();
