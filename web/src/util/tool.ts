@@ -57,6 +57,7 @@ export class Tool {
 
   /**
    * 随机生成[len]长度的[radix]进制数
+   * 生成uuid
    * @param len
    * @param radix 默认62
    * @returns {string}

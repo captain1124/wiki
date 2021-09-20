@@ -17,10 +17,12 @@ import com.captain.wiki.utils.CopyUtil;
 import com.captain.wiki.utils.RedisUtil;
 import com.captain.wiki.utils.RequestContext;
 import com.captain.wiki.utils.SnowFlake;
+import com.captain.wiki.websocket.WebSocketServer;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -46,6 +48,9 @@ public class DocService {
 
     @Resource
     private RedisUtil redisUtil;
+
+    @Resource
+    private WebSocketServer webSocketServer;
 
     private static final Logger LOG = LoggerFactory.getLogger(DocService.class);
 
@@ -157,10 +162,17 @@ public class DocService {
         } else {
             throw new BusinessException(BusinessExceptionCode.VOTE_REPEAT);
         }
+
+        // 推送消息
+        Doc docDb = docMapper.selectByPrimaryKey(id);
+        String logId = MDC.get("LOG_ID");
+        webSocketServer.sendInfo("【" + docDb.getName() + "】被点赞！");
+
     }
 
 
     public void updateEbookInfo() {
         docMapperCust.updateEbookInfo();
     }
+
 }

@@ -15,6 +15,7 @@
     setup() {
       const user = computed(() => store.state.user);
 
+      //websocket连接
       let websocket: any;
       let token: any;
       const onOpen = () => {
@@ -23,6 +24,7 @@
 
       const onMessage = (event: any) => {
         console.log('WebSocket收到消息：', event.data);
+        //弹出相应的成功框
         notification['info']({
           message: '收到消息',
           description: event.data,
